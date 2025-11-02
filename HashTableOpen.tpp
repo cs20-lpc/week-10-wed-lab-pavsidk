@@ -1,6 +1,11 @@
 template <typename Key, typename Val>
 HashTableOpen<Key, Val>::HashTableOpen(int i) {
     // TODO
+    M = i;
+    ht = new LinkedList<Record>*[M];
+    for (int n = 0; n < M; n++) {
+        ht[n] = new LinkedList<Record>();
+    }
 }
 
 template <typename Key, typename Val>
@@ -22,6 +27,12 @@ HashTableOpen<Key, Val>& HashTableOpen<Key, Val>::operator=
 template <typename Key, typename Val>
 HashTableOpen<Key, Val>::~HashTableOpen() {
     // TODO
+    for (int n = 0; n < M; n++) {
+        delete ht[n];
+    }
+    delete[] ht;
+    ht = nullptr;
+    this->M = 0;
 }
 
 template <typename Key, typename Val>
@@ -100,6 +111,15 @@ void HashTableOpen<Key, Val>::copy(const HashTableOpen<Key, Val>& copyObj) {
 template <typename Key, typename Val>
 Val HashTableOpen<Key, Val>::find(const Key& k) const {
     // TODO
+    LinkedList<Record>* linked_list = ht[hash(k)];
+
+    for (int i=0; i < linked_list->getLength(); i++) {
+        if (linked_list->getElement(i).k == k) {
+            return linked_list->getElement(i).v;
+        }
+    }
+
+    throw string("error: find, could not find the key");
 }
 
 template <typename Key, typename Val>
@@ -153,14 +173,40 @@ int HashTableOpen<Key, Val>::hash(const Key& k) const {
 template <typename Key, typename Val>
 void HashTableOpen<Key, Val>::insert(const Key& k, const Val& v) {
     // TODO
+    LinkedList<Record>* linked_list = ht[hash(k)]; 
+    for (int i = 0; i < linked_list->getLength(); i++) {
+        if (linked_list->getElement(i).k == k) {
+            Record n = linked_list->getElement(i);
+            n.v = v;
+            linked_list->replace(i, n);
+            return;
+        }
+    }
+    Record n;
+    n.k = k;
+    n.v = v;
+    linked_list->append(n);
 }
 
 template <typename Key, typename Val>
 void HashTableOpen<Key, Val>::remove(const Key& k) {
     // TODO
+    LinkedList<Record>* linked_list = ht[hash(k)]; 
+    for (int i = 0; i < linked_list->getLength(); i++) {
+        if (linked_list->getElement(i).k == k) {
+            linked_list->remove(i);
+            return;
+        }
+    }
+    throw string("error: remove, could not find the key");
 }
 
 template <typename Key, typename Val>
 int HashTableOpen<Key, Val>::size() const {
     // TODO
+    int length = 0;
+    for (int i = 0; i < M; i++) {
+        length += ht[i]->getLength();
+    }
+    return length;
 }

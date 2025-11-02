@@ -1,0 +1,46 @@
+banana  hashes to slot 84
+cactus  hashes to slot 8
+dog     hashes to slot 24
+graph   hashes to slot 75
+haskell hashes to slot 25
+igloo   hashes to slot 48
+phoenix hashes to slot 58
+quack   hashes to slot 48
+Welcome to my open hash table dictionary program!
+Here are your options:
+        1. Find
+        2. Insert
+        3. Remove
+        4. Size
+        5. Clear
+        6. Quit
+Enter your option: 1
+Enter a key to search my dictionary: hello
+hello   hashes to slot 87
+error: find, could not find the key
+Enter your option: 1
+Enter a key to search my dictionary: phoenix
+phoenix hashes to slot 58
+a bird on fire
+Enter your option: 2
+Enter the key of the new record: Earth
+Enter the value of the new record: Our Planet
+Earth   hashes to slot 65
+Enter your option: 1
+Enter a key to search my dictionary: cactus
+cactus  hashes to slot 8
+a pointy plant
+Enter your option: 3
+Enter the key of the record to be removed from my dictionary: cactus
+cactus  hashes to slot 8
+Enter your option: 1
+Enter a key to search my dictionary: cactus
+cactus  hashes to slot 8
+error: find, could not find the key
+Enter your option: 4
+Dictionary size is 8
+Enter your option: 5
+Clearing out my dictionary . . . cleared!
+Enter your option: 4
+Dictionary size is 0
+Enter your option: 6
